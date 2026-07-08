@@ -83,7 +83,7 @@ public class Sepultura {
         this.tipoSepultura = tipoSepultura;
     }
 
-    public String getStatuSepultura(){
+    public String getStatusSepultura(){
         return statusSepultura;
     }
 
@@ -107,5 +107,6 @@ public class Sepultura {
         this.dataCriacao = dataCriacao;
     }
 
+    
     
 }

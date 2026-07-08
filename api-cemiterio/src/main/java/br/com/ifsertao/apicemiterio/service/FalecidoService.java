@@ -19,7 +19,7 @@ public class FalecidoService {
     public Falecido salvar(Falecido falecido){
 /*Nessa condicional é onde adicionamos a regra de negócio: atráves de falecido é possivel acessar a sepultura a qual ele está 
 vinculado, acessando o status da sepultura verificamos se ela está disponível.Se ocupada a exceção é lançada e o falecido não é cadastrado.*/
-    if(falecido.getSepultura().getStatuSepultura().equals("OCUPADA")){
+    if(falecido.getSepultura().getStatusSepultura().equals("OCUPADA")){
         throw new RuntimeException("Sepultura ocupada.");
     }
     //Se a sepultura estiver disponível chamamos o método save() do Repository e salvamos o objeto falecido no banco de dados.
@@ -48,7 +48,7 @@ vinculado, acessando o status da sepultura verificamos se ela está disponível.
         //Por fim vamos atualizar os dados do falecido com o método save() também.
         return repository.save(falecido);
     }
-    public void Deletar(Long id){
+    public void deletar(Long id){
         //Verificamos se o falecido realmente existe antes de deletar buscando pelo id.
         buscarPorId(id);
         //ao confirmar o falecido é excluido.

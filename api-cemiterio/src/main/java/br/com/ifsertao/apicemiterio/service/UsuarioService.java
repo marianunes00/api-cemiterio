@@ -1,5 +1,49 @@
 package br.com.ifsertao.apicemiterio.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import br.com.ifsertao.apicemiterio.entity.Usuario;
+import br.com.ifsertao.apicemiterio.repository.UsuarioRepository;
+
+@Service
 public class UsuarioService {
+    
+    //cria a variavel do repositorio de usuario
+    private final UsuarioRepository reposity;
+
+    //inicializa pelo construtor
+    public UsuarioService(UsuarioRepository repository){
+        this.reposity = repository;
+    }
+
+    public Usuario salvar(Usuario usuario){
+        //regra de negocio que verifica se o campo de login está preenchido
+        if(usuario.getLogin()==null || usuario.getLogin().isBlank()){
+            throw new RuntimeException("O login é obrigatorio");
+        }
+        return reposity.save(usuario);
+    }
+
+    public List<Usuario> listarTodos(){
+        return reposity.findAll();
+    }
+
+    //busca por id e se não encontrar retorna a excessao
+    public Usuario buscarPorId(Long id){
+        return reposity.findById(id).orElseThrow(()-> new RuntimeException("Usuario não encontrado!"));
+    }
+
+    //buscar por id
+    public Usuario atualizar(Long id, Usuario usuario){
+        buscarPorId(id);
+        usuario.setIdUsuario(id);
+        return reposity.save(usuario);
+    }
+
+    public void deletar(Long id){
+        buscarPorId(id);
+        reposity.deleteById(id);
+    }
 
 }
