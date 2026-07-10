@@ -4,25 +4,47 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import br.com.ifsertao.apicemiterio.entity.Falecido;
+import br.com.ifsertao.apicemiterio.entity.Sepultura;
 import br.com.ifsertao.apicemiterio.repository.FalecidoRepository;
+import br.com.ifsertao.apicemiterio.repository.SepulturaRepository;
 
 @Service
 public class FalecidoService {
 
     private final FalecidoRepository repository;
+    private final SepulturaRepository sepulturaRepository;
 
-    public FalecidoService(FalecidoRepository repository) {
+    public FalecidoService(FalecidoRepository repository, SepulturaRepository sepulturaRepository) {
         this.repository = repository;
+        this.sepulturaRepository = sepulturaRepository;
     }
 
 //método para salvar(cadastrar) um falecido no sistema
+// /*Nessa condicional é onde adicionamos a regra de negócio: atráves de falecido é possivel acessar a sepultura a qual ele está vinculado, acessando o status da sepultura verificamos se ela está disponível.Se ocupada a exceção é lançada e o falecido não é cadastrado.*/
     public Falecido salvar(Falecido falecido){
-/*Nessa condicional é onde adicionamos a regra de negócio: atráves de falecido é possivel acessar a sepultura a qual ele está 
-vinculado, acessando o status da sepultura verificamos se ela está disponível.Se ocupada a exceção é lançada e o falecido não é cadastrado.*/
-    if(falecido.getSepultura().getStatusSepultura().equals("OCUPADA")){
+
+    if (falecido.getSepultura() == null) {
+        throw new RuntimeException("É necessário informar uma sepultura.");
+    }
+
+    // Busca a sepultura no banco pelo ID
+    Sepultura sepultura = sepulturaRepository.findById(
+            falecido.getSepultura().getIdSepultura())
+            .orElseThrow(() -> new RuntimeException("Sepultura não encontrada."));
+
+    // Verifica se ela está ocupada
+    if (sepultura.getStatusSepultura().equals("OCUPADA")) {
         throw new RuntimeException("Sepultura ocupada.");
     }
-    //Se a sepultura estiver disponível chamamos o método save() do Repository e salvamos o objeto falecido no banco de dados.
+
+    // Associa a sepultura encontrada ao falecido
+    falecido.setSepultura(sepultura);
+
+    // (Opcional) muda o status da sepultura para ocupada
+    sepultura.setStatusSepultura("OCUPADA");
+    sepulturaRepository.save(sepultura);
+
+    // Salva o falecido
     return repository.save(falecido);
 }
 
