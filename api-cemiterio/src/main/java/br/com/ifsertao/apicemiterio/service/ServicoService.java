@@ -2,6 +2,8 @@ package br.com.ifsertao.apicemiterio.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import br.com.ifsertao.apicemiterio.entity.Sepultura;
 import br.com.ifsertao.apicemiterio.entity.Servico;
 import br.com.ifsertao.apicemiterio.repository.ServicoRepository;
 
@@ -20,6 +22,8 @@ public class ServicoService {
         if(servico.getSepultura()==null){
             throw new RuntimeException("O servico precisa estar relacionado com alguma sepultura!");
         }
+
+       
 
         return repository.save(servico);
     }

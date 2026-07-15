@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifsertao.apicemiterio.entity.Servico;
 import br.com.ifsertao.apicemiterio.service.ServicoService;
+import jakarta.validation.Valid;
 
 @RestController 
 @RequestMapping("/servicos")
@@ -35,12 +36,12 @@ public class ServicoController {
     }
 
     @PostMapping
-    public Servico salvar(@RequestBody Servico servico){
+    public Servico salvar(@Valid @RequestBody Servico servico){
         return service.salvar(servico);
     }
 
     @PutMapping("/{id}")
-    public Servico atualizar(@PathVariable Long id, @RequestBody Servico servico){
+    public Servico atualizar(@PathVariable Long id,@Valid @RequestBody Servico servico){
         return service.atualizar(id, servico);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.ifsertao.apicemiterio.service.FalecidoService;
+import jakarta.validation.Valid;
 import br.com.ifsertao.apicemiterio.entity.Falecido;
 import br.com.ifsertao.apicemiterio.repository.SepulturaRepository;
 
@@ -34,14 +35,14 @@ public class FalecidoController {
         return service.buscarPorId(id);
     }
 
-
+    //o valid serve para verificar antes de salvar e faz parte do bean validation
     @PostMapping
-    public Falecido salvar(@RequestBody Falecido falecido){
+    public Falecido salvar(@Valid @RequestBody Falecido falecido){
         return service.salvar(falecido);
     }
 
     @PutMapping("/{id}")
-    public Falecido atualizar(@PathVariable Long id, @RequestBody Falecido falecido){
+    public Falecido atualizar(@PathVariable Long id, @Valid @RequestBody Falecido falecido){
         return service.atualizar(id, falecido);
     }
 

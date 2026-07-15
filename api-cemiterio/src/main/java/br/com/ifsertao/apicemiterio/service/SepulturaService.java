@@ -16,6 +16,11 @@ public class SepulturaService {
     }
 
     public Sepultura salvar(Sepultura sepultura){
+        //regra de negocio que verifica o status da sepultura antes de salvar
+       if (!sepultura.getStatusSepultura().equals("DISPONIVEL") &&
+            !sepultura.getStatusSepultura().equals("OCUPADA")) {
+            throw new RuntimeException("Status da sepultura inválido.");
+        }
         return repository.save(sepultura);
     }
 
@@ -35,14 +40,17 @@ public class SepulturaService {
         return repository.save(sepultura);
     }
 
+    // - Verificar se há falecidos vinculados à sepultura antes da exclusão.
     public void deletar(Long id){
-        buscarPorId(id);
-
+       
+        //não permite excluir uma sepultura que tenha falecido nela
+        Sepultura sepultura = buscarPorId(id);
+        //faz a verificacao se a sepultura não está vazia, se não estiver, lança a exceção informando
+        if (!sepultura.getFalecidos().isEmpty()) {
+        throw new RuntimeException("Não é possível excluir uma sepultura que possui falecidos cadastrados.");
+}       
         repository.deleteById(id);
+        }
     }
-    }
-    //Falta adicionar as regras de negócio, tipo:antes de excluir uma sepultura deve-se verificar
-    //se há falecido vinculado a ela.
-// - Verificar se há falecidos vinculados à sepultura antes da exclusão.
+
 // - Impedir o cadastro de duas sepulturas com a mesma identificação.
-// - Validar o status da sepultura.

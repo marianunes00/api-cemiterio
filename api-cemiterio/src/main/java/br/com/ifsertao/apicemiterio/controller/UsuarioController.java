@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifsertao.apicemiterio.entity.Usuario;
 import br.com.ifsertao.apicemiterio.service.UsuarioService;
+import jakarta.validation.Valid;
 
 @RestController // Indica que esta classe é um Controller REST, responsável por receber requisições HTTP.
 @RequestMapping("/usuarios") // Define a rota base da API para as operações relacionadas aos usuários.
@@ -42,13 +43,13 @@ public class UsuarioController {
 
     //essa anotação indica que responde a uma requisição endpoint post, onde é realizado o cadastro de Usuário no BD
     @PostMapping
-    public Usuario salvar(@RequestBody Usuario usuario) {
+    public Usuario salvar( @Valid @RequestBody Usuario usuario) {
         return service.salvar(usuario);
     }
 
     //Put atualiza o usuario com os dados modificados utilizando o id da url.
     @PutMapping("/{id}")
-    public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public Usuario atualizar(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
         return service.atualizar(id, usuario);
     }
 

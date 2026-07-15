@@ -13,6 +13,8 @@ public class Falecido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFalecido;
 
+    //colocamos essa anotações ja como prática do bean validation
+    //com elas evitamos de que qualquer dado passe ou que qualquer preenchimento vazio passe também
     @NotBlank
     private String nomeCompleto;
 
@@ -20,7 +22,6 @@ public class Falecido {
     private LocalDate dataNascimento;
 
     @NotBlank
-    @NotNull
     private String possuiCertidaoObito;
 
     @NotBlank
