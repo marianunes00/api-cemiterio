@@ -1,9 +1,9 @@
 package br.com.ifsertao.apicemiterio.service;
-import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.ifsertao.apicemiterio.entity.Sepultura;
 import br.com.ifsertao.apicemiterio.entity.Servico;
 import br.com.ifsertao.apicemiterio.repository.ServicoRepository;
 
@@ -17,7 +17,7 @@ public class ServicoService {
         this.repository = repository;
     }
 
-    //agora criar o metodo par salvar
+    //agora criar o metodo para salvar
     public Servico salvar(Servico servico){
         if(servico.getSepultura()==null){
             throw new RuntimeException("O servico precisa estar relacionado com alguma sepultura!");
@@ -28,10 +28,10 @@ public class ServicoService {
         return repository.save(servico);
     }
 
-    //agora para listar os servicos criados
-    public List<Servico> listarTodos(){
+    //agora para listar os servicos criados em pagina
+    public Page<Servico> listarTodos(Pageable pageable){
         //método findAll() é fornecido pelo Spring Data JPA. Ele serve para buscar todos os registros de uma entidade no banco de dados e os retorna em formato de List
-        return repository.findAll();
+        return repository.findAll(pageable);
     }
 
     //buscar por id de servico

@@ -1,7 +1,7 @@
-package br.com.ifsertao.apicemiterio.service;
+package br.com.ifsertao.apicemiterio.service;g
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.ifsertao.apicemiterio.entity.Falecido;
 import br.com.ifsertao.apicemiterio.entity.Sepultura;
@@ -49,8 +49,8 @@ public class FalecidoService {
 }
 
 //Método que lista todos os falecidos cadastrados no sistema, chamando o método findAll() do Repository.
-    public List<Falecido> listarTodos(){
-        return repository.findAll();
+    public Page<Falecido> listarTodos(Pageable pageable){
+        return repository.findAll(pageable);
 }
 //Método que busca um falecido pelo ID informado, se ele existir vai devolver o falecido referente, se não encontrar lança uma exceção.
     public Falecido buscarPorId(Long id){

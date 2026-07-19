@@ -1,7 +1,8 @@
 package br.com.ifsertao.apicemiterio.service;
 
-import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.ifsertao.apicemiterio.entity.Usuario;
 import br.com.ifsertao.apicemiterio.repository.UsuarioRepository;
@@ -25,8 +26,9 @@ public class UsuarioService {
         return reposity.save(usuario);
     }
 
-    public List<Usuario> listarTodos(){
-        return reposity.findAll();
+    // Lista os usuários utilizando paginação.
+    public Page<Usuario> listarTodos(Pageable pageable){
+        return reposity.findAll(pageable);
     }
 
     //busca por id e se não encontrar retorna a excessao

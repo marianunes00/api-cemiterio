@@ -1,17 +1,20 @@
 package br.com.ifsertao.apicemiterio.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.ifsertao.apicemiterio.service.FalecidoService;
 import jakarta.validation.Valid;
 import br.com.ifsertao.apicemiterio.entity.Falecido;
 import br.com.ifsertao.apicemiterio.repository.SepulturaRepository;
 
-import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -26,8 +29,10 @@ public class FalecidoController {
     }
 
     @GetMapping
-    public List<Falecido> listarTodos(){
-        return service.listarTodos();
+    public Page<Falecido> listarTodos(@RequestParam(defaultValue="0") int page,
+        @RequestParam(defaultValue="10") int size){
+            Pageable pageable = PageRequest.of(page, size);
+        return service.listarTodos(pageable);
     }
 
     @GetMapping("/{id}")

@@ -1,7 +1,9 @@
 package br.com.ifsertao.apicemiterio.controller;
 
-import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import br.com.ifsertao.apicemiterio.entity.Usuario;
 import br.com.ifsertao.apicemiterio.service.UsuarioService;
@@ -31,8 +35,14 @@ public class UsuarioController {
 
     // Endpoint GET: lista todos os usuários cadastrados no banco de dados.
     @GetMapping
-    public List<Usuario> listarTodos() {
-        return service.listarTodos();
+    public Page<Usuario> listarTodos( @RequestParam(defaultValue="0") int page,
+        @RequestParam(defaultValue="10") int size) {
+            // page: número da página (começa em 0),size: quantidade de registros por página
+
+            /*Cria um objeto Pageable contendo o número da página e a quantidade
+            de registros que serão retornados nessa página.*/
+             Pageable pageable = PageRequest.of(page,size);
+        return service.listarTodos(pageable);
     }
 
     // Endpoint GET: busca um usuário pelo ID informado na URL.

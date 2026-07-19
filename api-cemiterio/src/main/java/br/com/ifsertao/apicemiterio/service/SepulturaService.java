@@ -2,6 +2,8 @@ package br.com.ifsertao.apicemiterio.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.ifsertao.apicemiterio.entity.Sepultura;
 import br.com.ifsertao.apicemiterio.repository.SepulturaRepository;
@@ -24,8 +26,8 @@ public class SepulturaService {
         return repository.save(sepultura);
     }
 
-    public List<Sepultura> listarTodos(){
-        return repository.findAll();
+    public Page<Sepultura> listarTodos(Pageable pageable){
+        return repository.findAll(pageable);
     }
 
     public Sepultura buscarPorId(Long id){
