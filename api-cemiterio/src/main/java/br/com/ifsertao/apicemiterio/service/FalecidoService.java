@@ -1,6 +1,9 @@
-package br.com.ifsertao.apicemiterio.service;g
+package br.com.ifsertao.apicemiterio.service;
+
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.ifsertao.apicemiterio.entity.Falecido;
@@ -56,6 +59,28 @@ public class FalecidoService {
     public Falecido buscarPorId(Long id){
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Falecido não encontrado."));
     }
+//Busca falecidos pelo nome informado, ignorando letras maiúsculas e minúsculas.e o resultado é retornado em páginas.
+    public Page<Falecido> buscarPorNome(String nome, int page, int size){
+        // Cria um objeto Pageable informando qual página será retornada e quantos registros existirão em cada página.
+        Pageable pageable = PageRequest.of(page, size);
+        // Chama o Repository para realizar a busca no banco utilizando o nome informado e a paginação.
+            return repository.findByNomeCompletoContainingIgnoreCase(nome, pageable);
+
+}
+// Busca um falecido pelo CPF e retorna Optional para tratar o caso em que o CPF não exista.
+    public Optional<Falecido> buscarPorCpf(String cpf){
+        return repository.findByCpf(cpf);
+
+}
+// Busca falecidos pelo nome do familiar responsável,ignorando letras maiúsculas e minúsculas e o resultado é paginado.
+    public Page<Falecido> buscarPorResponsavel(String familiar, int page, int size){
+
+    Pageable pageable = PageRequest.of(page, size);
+
+    return repository.findByFamiliarResponsavelContainingIgnoreCase(familiar, pageable);
+
+}
+
 // Método responsável por atualizar os dados de um falecido.
     public Falecido atualizar(Long id, Falecido falecido){
 
