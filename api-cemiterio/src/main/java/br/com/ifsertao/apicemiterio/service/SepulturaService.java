@@ -1,8 +1,7 @@
 package br.com.ifsertao.apicemiterio.service;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.ifsertao.apicemiterio.entity.Sepultura;
@@ -34,11 +33,32 @@ public class SepulturaService {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Sepultura não encontrada."));
     }
 
+   
+    public Page<Sepultura> buscarPorStatus(String status, int page, int size){
+
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByStatusSepulturaContainingIgnoreCase(status, pageable);
+
+    }
+
+    public Page<Sepultura> buscarPorLote(String lote, int page, int size){
+
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByLoteContainingIgnoreCase(lote, pageable);
+
+    }
+
+    public Page<Sepultura> buscarPorTipo(String tipo, int page, int size){
+
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByTipoSepulturaContainingIgnoreCase(tipo, pageable);
+
+    }
+
+
     public Sepultura atualizar(Long id, Sepultura sepultura){
         buscarPorId(id);
-
         sepultura.setIdSepultura(id);
-
         return repository.save(sepultura);
     }
 
