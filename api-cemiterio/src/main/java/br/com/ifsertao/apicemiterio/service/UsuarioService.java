@@ -2,8 +2,11 @@ package br.com.ifsertao.apicemiterio.service;
 
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import br.com.ifsertao.apicemiterio.entity.Servico;
 import br.com.ifsertao.apicemiterio.entity.Usuario;
 import br.com.ifsertao.apicemiterio.repository.UsuarioRepository;
 
@@ -47,5 +50,21 @@ public class UsuarioService {
         buscarPorId(id);
         reposity.deleteById(id);
     }
+
+    //paginação, isso faz com que o spring devolva pagina com registro
+    public Page<Usuario> buscarPorLogin(String login, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return reposity.findByLoginContainingIgnoreCase(login, pageable);
+    }
+
+    //faz a mesma coisa do outro metodo, só que agora busca por perfil, cria a pagina pra retornar só o desejado
+    public Page<Usuario> buscarPorPerfil(String perfil, int page, int size){
+        Pageable pageable = PageRequest.of(page,size);
+        return reposity.findByPerfilContainingIgnoreCase(perfil, pageable);
+    }
+
+     
+
+
 
 }
