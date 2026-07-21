@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 
 import br.com.ifsertao.apicemiterio.entity.Servico;
 import br.com.ifsertao.apicemiterio.service.ServicoService;
 import jakarta.validation.Valid;
+
 
 @RestController 
 @RequestMapping("/servicos")
@@ -35,6 +37,25 @@ public class ServicoController {
         return service.listarTodos(pageable);
     }
     
+    //cria o endpoint que cria  arota de buscar por tipo em servico, e estabelece os parametro
+    //quando alguem quiser buscar o de limpeza ele vai colcoar a limpeza como tipo
+    @GetMapping("/buscar/tipo")
+    public ResponseEntity<Page<Servico>> buscarPorTipo(
+        @RequestParam String tipo,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size){
+            return ResponseEntity.ok(service.buscarPorTipo(tipo, page, size));
+        }
+    
+        //mesma coisa do outro, só que para buscar por status
+    @GetMapping("/buscar/status")
+    public ResponseEntity<Page<Servico>> buscarPorStatus(
+        @RequestParam String status,
+        @RequestParam(defaultValue = "0")  int page,
+        @RequestParam(defaultValue = "10") int size){
+            return ResponseEntity.ok(service.buscarPorStatus(status,page,size));
+        }
+
     @GetMapping("/{id}")
     public Servico buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);

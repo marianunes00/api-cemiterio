@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.ifsertao.apicemiterio.entity.Servico;
 import br.com.ifsertao.apicemiterio.repository.ServicoRepository;
+import org.springframework.data.domain.PageRequest;
+
 
 @Service
 public class ServicoService {
@@ -33,6 +35,21 @@ public class ServicoService {
         //método findAll() é fornecido pelo Spring Data JPA. Ele serve para buscar todos os registros de uma entidade no banco de dados e os retorna em formato de List
         return repository.findAll(pageable);
     }
+
+    //recebe o texto digitado pelo usuario e a pagina desejada e a quantidade de registros, cria a pagina
+    //cria a pagina usadno esses parametros, e esse objeto de pagina vai ser enviada para o repository
+    //retorna o resultado do metodo que foi criado no repository
+    public Page<Servico> buscarPorTipo(String tipo, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByTipoServicoContainingIgnoreCase(tipo, pageable);
+    }
+
+    //faz a mesma coisa do outro metodo, só que agora busca por status, cria aapgina pra retornar só o desejado
+    public Page<Servico> buscarPorStatus(String tipo, int page, int size){
+        Pageable pageable = PageRequest.of(page,size);
+        return repository.findByStatusServicoContainingIgnoreCase(tipo, pageable);
+    }
+
 
     //buscar por id de servico
     public Servico buscarPorId(Long id){
