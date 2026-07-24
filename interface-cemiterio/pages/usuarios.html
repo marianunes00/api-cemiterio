@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuários</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <a href="../index.html" class="btn btn-outline-success mb-4">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar
+    </a>
+
+    <h1 class="titulo-pagina">
+        <i class="fa-solid fa-users"></i>
+        Usuários
+    </h1>
+
+   <div class="card-page">
+
+    <div class="row mb-4 align-items-end">
+
+        <div class="col-md-8">
+
+            <label class="form-label">Pesquisar por nome</label>
+
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Pesquisar por nome">
+
+        </div>
+
+        <div class="col-md-2 d-grid">
+
+            <button class="btn btn-success btn-pesquisar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Pesquisar
+            </button>
+
+        </div>
+
+        <div class="col-md-2 d-grid">
+
+            <button class="btn btn-success btn-novo">
+                <i class="fa-solid fa-plus"></i>
+                Novo
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- tabela -->
+
+</div>
+
+        <hr>
+
+        <table class="table table-hover align-middle">
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Perfil</th>
+                    <th>Ações</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td colspan="4" class="text-center">
+
+                        Nenhum registro encontrado.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="d-flex justify-content-center mt-3">
+
+            <button class="btn btn-outline-success me-2">
+
+                <i class="fa-solid fa-angle-left"></i>
+
+            </button>
+
+            <span class="align-self-center">
+
+                Página 1
+
+            </span>
+
+            <button class="btn btn-outline-success ms-2">
+
+                <i class="fa-solid fa-angle-right"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

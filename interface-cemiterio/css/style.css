@@ -1,0 +1,334 @@
+/* ==========================================
+   PALETA DE CORES
+========================================== */
+
+:root{
+
+    /* Cores principais */
+
+    --cor-principal: #036666;
+    --cor-secundaria: #219292;
+
+    /* Fundo */
+
+    --fundo: #F5F7F6;
+
+    /* Branco */
+
+    --branco: #FFFFFF;
+
+    /* Cinza */
+
+    --cinza-claro: #E8ECEF;
+
+    /* Texto */
+
+    --texto: #2E2E2E;
+
+}
+
+/* ==========================================
+   CONFIGURAÇÕES GERAIS
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:var(--fundo);
+    color:var(--texto);
+}
+
+/* ==========================================
+   CABEÇALHO
+========================================== */
+
+.logo{
+    width:520px;
+    display:block;
+    margin:0 auto -50px auto;
+}
+
+.subtitulo{
+    text-align:center;
+    color:#666;
+    font-size:18px;
+    margin-bottom:30px;
+}
+
+
+/* ==========================================
+   FALECIDOS TÍTULOS
+========================================== */
+
+.titulo-pagina{
+
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:35px;
+    color: var(--cor-principal);
+
+}
+
+.titulo-pagina i{
+    color: var(--cor-principal);
+    margin-right:10px;
+
+}
+
+
+/* ==========================================
+   CARD PRINCIPAL
+========================================== */
+
+.card-page{
+
+    background:var(--branco);
+
+    border-radius:20px;
+
+    padding:35px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+
+/* ==========================================
+   CARDS DA HOME
+========================================== */
+
+.card{
+
+    border:none;
+
+    border-radius:18px;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.card i{
+
+    color:var(--cor-principal);
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.card h3{
+
+    font-weight:600;
+
+}
+
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.btn-success{
+
+    background:var(--cor-principal);
+    border:none;
+    border-radius:12px;
+    height:48px;
+
+}
+
+.btn-success:hover{
+
+    background:var(--cor-secundaria);
+
+}
+
+.btn-outline-success{
+
+    border-radius:12px;
+
+}
+
+
+/* Botão Novo */
+
+.btn-novo{
+
+    height:50px;
+
+    min-width:190px;
+
+    border-radius:12px;
+
+}
+
+
+/* Botão Pesquisar */
+
+.btn-pesquisar{
+
+    height:50px;
+
+    width:180px;
+
+    border-radius:12px;
+
+}
+
+
+/* ==========================================
+   FORMULÁRIOS
+========================================== */
+
+.form-control{
+
+    height:50px;
+
+    border-radius:12px;
+
+}
+
+.form-select{
+
+    height:50px;
+
+    border-radius:12px;
+
+}
+
+
+/* ==========================================
+   TABELA
+========================================== */
+
+.table{
+
+    margin-top:25px;
+
+}
+
+.table thead{
+
+    background:#F3F7F7;
+
+}
+
+.table th{
+
+    color:var(--cor-principal);
+
+    font-weight:600;
+
+    border-bottom:2px solid var(--cinza-claro);
+
+}
+
+.table td{
+
+    vertical-align:middle;
+
+}
+
+
+/* ==========================================
+   PAGINAÇÃO
+========================================== */
+
+.paginacao{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.paginacao button{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:12px;
+
+}
+
+
+/* ==========================================
+   BOTÕES DE AÇÃO
+========================================== */
+
+.btn-editar{
+
+    background:#FFC107;
+
+    color:#000;
+
+    border:none;
+
+}
+
+.btn-excluir{
+
+    background:#DC3545;
+
+    color:#FFF;
+
+    border:none;
+
+}
+
+.btn-editar,
+.btn-excluir{
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:10px;
+
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media(max-width:768px){
+
+    .logo{
+
+        width:170px;
+
+    }
+
+    h1{
+
+        font-size:32px;
+
+    }
+
+    .subtitulo{
+
+        font-size:16px;
+
+    }
+
+}
