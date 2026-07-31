@@ -4,141 +4,479 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Serviços</title>
 
+
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- CSS do projeto -->
+    <link
+        rel="stylesheet"
+        href="../css/style.css">
 
 </head>
 
+
 <body>
+
 
 <div class="container py-5">
 
-    <a href="../index.html" class="btn btn-outline-success mb-4">
+
+    <!-- Botão para voltar à página inicial -->
+    <a
+        href="../index.html"
+        class="btn btn-outline-success mb-4">
+
         <i class="fa-solid fa-arrow-left"></i>
+
         Voltar
+
     </a>
 
+
+
+    <!-- Título da página -->
     <h1 class="titulo-pagina">
+
         <i class="fa-solid fa-screwdriver-wrench"></i>
+
         Serviços
+
     </h1>
 
-   <div class="card-page">
 
-    <div class="row mb-4 align-items-end">
 
-        <div class="col-md-8">
+    <div class="card-page">
 
-            <label class="form-label">Pesquisar por tipo ou status do serviço</label>
 
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Pesquisar por tipo ou status">
+        <!-- Área de pesquisa -->
+        <div class="row mb-4 align-items-end">
+
+
+            <!-- Tipo de filtro -->
+            <div class="col-md-3">
+
+                <label class="form-label">
+                    Pesquisar por
+                </label>
+
+                <select
+                    id="tipoFiltro"
+                    class="form-select">
+
+                    <option value="id">
+                        ID
+                    </option>
+
+                    <option value="tipo">
+                        Tipo
+                    </option>
+
+                    <option value="status">
+                        Status
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- Valor da pesquisa -->
+            <div class="col-md-5">
+
+                <label class="form-label">
+                    Valor da pesquisa
+                </label>
+
+                <input
+                    id="txtPesquisa"
+                    type="text"
+                    class="form-control"
+                    placeholder="Digite o valor">
+
+            </div>
+
+
+
+            <!-- Botão pesquisar -->
+            <div class="col-md-2 d-grid">
+
+                <button
+                    id="btnPesquisar"
+                    class="btn btn-success btn-pesquisar">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Pesquisar
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Botão novo -->
+            <div class="col-md-2 d-grid">
+
+                <button
+                    id="btnNovo"
+                    class="btn btn-success btn-novo">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Novo
+
+                </button>
+
+            </div>
+
 
         </div>
 
-        <div class="col-md-2 d-grid">
-
-            <button class="btn btn-success btn-pesquisar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                Pesquisar
-            </button>
-
-        </div>
-
-        <div class="col-md-2 d-grid">
-
-            <button class="btn btn-success btn-novo">
-                <i class="fa-solid fa-plus"></i>
-                Novo
-            </button>
-
-        </div>
 
     </div>
 
-    <!-- tabela -->
 
-</div>
 
-        <hr>
+    <hr>
 
-        <table class="table table-hover align-middle">
 
-            <thead>
 
-                <tr>
+    <!-- Tabela responsável por exibir os serviços -->
+    <table class="table table-hover align-middle">
 
-                    <th>Nome</th>
-                    <th>Data do Serviço</th>
-                    <th>Tipo</th>
-                    <th>Status</th>
-                    <th>Sepultura</th>
-                    <th>Notificações internas</th>
-                    <th>Ações</th>
 
-                </tr>
+        <thead>
 
-            </thead>
+            <tr>
 
-            <tbody>
+                <th>ID</th>
 
-                <tr>
+                <th>Data do Serviço</th>
 
-                    <td colspan="7" class="text-center">
+                <th>Tipo</th>
 
-                        Nenhum registro encontrado.
+                <th>Status</th>
 
-                    </td>
+                <th>Sepultura</th>
 
-                </tr>
+                <th>Notificações internas</th>
 
-            </tbody>
+                <th>Ações</th>
 
-        </table>
+            </tr>
 
-        <div class="d-flex justify-content-center mt-3">
+        </thead>
 
-            <button class="btn btn-outline-success me-2">
 
-                <i class="fa-solid fa-angle-left"></i>
 
-            </button>
+        <!--
+            O JavaScript utiliza este ID
+            para inserir os serviços recebidos da API.
+        -->
+        <tbody id="tbodyServicos">
 
-            <span class="align-self-center">
+            <tr>
 
-                Página 1
+                <td
+                    colspan="7"
+                    class="text-center">
 
-            </span>
+                    Nenhum registro encontrado.
 
-            <button class="btn btn-outline-success ms-2">
+                </td>
 
-                <i class="fa-solid fa-angle-right"></i>
+            </tr>
 
-            </button>
+        </tbody>
+
+
+    </table>
+
+
+
+    <!-- ===================================================== -->
+    <!-- MODAL DE CADASTRO E EDIÇÃO DE SERVIÇO -->
+    <!-- ===================================================== -->
+
+    <div
+        class="modal fade"
+        id="modalServico"
+        tabindex="-1">
+
+
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+
+
+                <!-- Cabeçalho do modal -->
+                <div class="modal-header">
+
+                    <h5
+                        class="modal-title"
+                        id="tituloModal">
+
+                        Novo Serviço
+
+                    </h5>
+
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+
+
+                <!-- Corpo do modal -->
+                <div class="modal-body">
+
+
+                    <!-- Data do serviço -->
+                    <div class="mb-3">
+
+                        <label
+                            for="dataServico"
+                            class="form-label">
+
+                            Data do Serviço
+
+                        </label>
+
+
+                        <input
+                            type="date"
+                            id="dataServico"
+                            class="form-control">
+
+                    </div>
+
+
+
+                    <!-- Tipo do serviço -->
+                    <div class="mb-3">
+
+                        <label
+                            for="tipoServico"
+                            class="form-label">
+
+                            Tipo do Serviço
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="tipoServico"
+                            class="form-control"
+                            placeholder="Digite o tipo do serviço">
+
+                    </div>
+
+
+
+                    <!-- Status do serviço -->
+                    <div class="mb-3">
+
+                        <label
+                            for="statusServico"
+                            class="form-label">
+
+                            Status
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="statusServico"
+                            class="form-control"
+                            placeholder="Digite o status do serviço">
+
+                    </div>
+
+
+
+                    <!-- Sepultura relacionada ao serviço -->
+                    <div class="mb-3">
+
+                        <label
+                            for="sepulturaServico"
+                            class="form-label">
+
+                            Sepultura
+
+                        </label>
+
+
+                        <!--
+                            As opções deste select serão carregadas
+                            pelo JavaScript utilizando a API
+                            de Sepulturas.
+                        -->
+                        <select
+                            id="sepulturaServico"
+                            class="form-select">
+
+                            <option value="">
+                                Selecione a sepultura
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Notificação interna -->
+                    <div class="mb-3">
+
+                        <label
+                            for="notificacaoServico"
+                            class="form-label">
+
+                            Notificação interna
+
+                        </label>
+
+
+                        <textarea
+                            id="notificacaoServico"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Digite a notificação interna"></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- Rodapé do modal -->
+                <div class="modal-footer">
+
+
+                    <!-- Fecha o modal sem salvar -->
+                    <button
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancelar
+
+                    </button>
+
+
+                    <!--
+                        O JavaScript utiliza este botão
+                        tanto no cadastro quanto na edição.
+                    -->
+                    <button
+                        id="btnSalvar"
+                        class="btn btn-success">
+
+                        Salvar
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
 
         </div>
 
+
     </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- PAGINAÇÃO -->
+    <!-- ===================================================== -->
+
+    <div class="d-flex justify-content-center mt-3">
+
+
+        <!-- Página anterior -->
+        <button
+            id="btnAnterior"
+            class="btn btn-outline-success me-2">
+
+            <i class="fa-solid fa-angle-left"></i>
+
+        </button>
+
+
+
+        <!-- Informação da página atual -->
+        <span
+            id="infoPagina"
+            class="align-self-center">
+
+            Página 1
+
+        </span>
+
+
+
+        <!-- Próxima página -->
+        <button
+            id="btnProxima"
+            class="btn btn-outline-success ms-2">
+
+            <i class="fa-solid fa-angle-right"></i>
+
+        </button>
+
+
+    </div>
+
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- JavaScript do Bootstrap -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- JavaScript responsável pela integração com a API -->
+<script src="../js/servico.js"></script>
+
 
 </body>
+
 </html>
