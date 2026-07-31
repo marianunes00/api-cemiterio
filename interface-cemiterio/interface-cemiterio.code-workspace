@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../api-cemiterio"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "interface-cemiterio"
+	}
+}
